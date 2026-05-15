@@ -735,7 +735,7 @@ p { color: var(--clr-text-m); }
   padding-top: 4rem;
   padding-bottom: 3rem;
 }
-.footer-brand .logo-img { height: 52px; margin-bottom: 1rem; filter: brightness(0) invert(1) opacity(.75); }
+.footer-brand .logo-img { height: 52px; margin-bottom: 1rem; filter: brightness(1.4) opacity(.85); }
 .footer-brand .logo-text { color: rgba(255,255,255,.8); font-size: 1.3rem; margin-bottom: 1rem; display: block; }
 .footer-brand p { font-size: .875rem; line-height: 1.7; max-width: 260px; }
 .footer-links h4, .footer-contact h4 {
