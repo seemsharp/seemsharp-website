@@ -16,7 +16,7 @@
 // ─────────────────────────────────────────────────────────────────
 
 window.EMAILJS_CONFIG = {
-  publicKey:  'VOTRE_PUBLIC_KEY',   // ex: 'abc123XYZ'
-  serviceId:  'VOTRE_SERVICE_ID',   // ex: 'service_xxxxxxx'
-  templateId: 'VOTRE_TEMPLATE_ID',  // ex: 'template_xxxxxxx'
+  publicKey:  't4D2al2Hd6KtBqUsd',   // ex: 'abc123XYZ'
+  serviceId:  'service_go4ei5g',   // ex: 'service_xxxxxxx'
+  templateId: 'template_6zic3as',  // ex: 'template_xxxxxxx'
 };
