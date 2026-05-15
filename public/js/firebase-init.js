@@ -19,8 +19,23 @@ const db        = getFirestore(app);
 // Région Firestore : europe-west9 (Paris)
 
 window.submitContact = async function submitContact(payload) {
+  // 1. Sauvegarde Firestore
   await addDoc(collection(db, 'contacts'), {
     ...payload,
     createdAt: serverTimestamp(),
   });
+
+  // 2. Envoi email via EmailJS
+  const cfg = window.EMAILJS_CONFIG;
+  if (cfg && cfg.publicKey !== 'VOTRE_PUBLIC_KEY') {
+    emailjs.init({ publicKey: cfg.publicKey });
+    await emailjs.send(cfg.serviceId, cfg.templateId, {
+      prenom:  payload.prenom,
+      nom:     payload.nom,
+      email:   payload.email,
+      societe: payload.societe || '–',
+      sujet:   payload.sujet,
+      message: payload.message,
+    });
+  }
 };
