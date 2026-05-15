@@ -97,9 +97,10 @@ form.addEventListener('submit', async (e) => {
   const fields = ['prenom','nom','email','sujet','message'];
   let valid = true;
   fields.forEach(id => { if (!validateField(document.getElementById(id))) valid = false; });
-  if (!form.rgpd.checked) {
+  const rgpdBox = document.getElementById('rgpd');
+  if (!rgpdBox.checked) {
     valid = false;
-    form.rgpd.closest('.form-group').classList.add('error');
+    rgpdBox.closest('.form-group').classList.add('error');
   }
   if (!valid) { showMsg('error', 'Veuillez remplir tous les champs obligatoires.'); return; }
 
@@ -120,7 +121,7 @@ form.addEventListener('submit', async (e) => {
   try {
     // Try Firebase Function first, fall back to direct Firestore
     await submitContact(payload);
-    showMsg('success', 'Votre message a bien été envoyé. Nous vous répondrons sous 24 h ouvrées.');
+    showMsg('success', 'Votre message a bien été envoyé. Nous vous répondrons au plus vite.');
     form.reset();
     generateCaptcha();
   } catch (err) {
@@ -135,6 +136,9 @@ form.addEventListener('submit', async (e) => {
 /* Clear error on input */
 form.querySelectorAll('input, select, textarea').forEach(el => {
   el.addEventListener('input', () => el.classList.remove('error'));
+});
+document.getElementById('rgpd').addEventListener('change', function () {
+  this.closest('.form-group').classList.remove('error');
 });
 
 /* ─── submitContact – called from main.js, implemented in firebase-init.js ─── */
