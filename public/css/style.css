@@ -168,7 +168,7 @@ p { color: var(--clr-text-m); }
   height: 100%;
 }
 .logo-link { display: flex; align-items: center; }
-.logo-img { height: 40px; width: auto; }
+.logo-img { height: 56px; width: auto; }
 .logo-text {
   font-family: var(--ff-display);
   font-size: 1.5rem;
