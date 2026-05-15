@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 160" fill="none">
+  <!-- Orb swirl background -->
+  <circle cx="240" cy="80" r="58" fill="#C4B5A0" opacity="0.45"/>
+  <circle cx="240" cy="80" r="72" stroke="#C4B5A0" stroke-width="1.2" opacity="0.35" fill="none"/>
+  <circle cx="240" cy="80" r="86" stroke="#C4B5A0" stroke-width="0.8" opacity="0.25" fill="none"/>
+  <circle cx="240" cy="80" r="100" stroke="#C4B5A0" stroke-width="0.6" opacity="0.18" fill="none"/>
+
+  <!-- Swirl arcs -->
+  <path d="M 165 55 Q 240 20 315 75 Q 360 105 300 135" stroke="#C4B5A0" stroke-width="1.2" fill="none" opacity="0.5"/>
+  <path d="M 170 100 Q 200 130 255 125 Q 310 118 330 85" stroke="#C4B5A0" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M 175 65 Q 220 30 280 50 Q 325 68 320 100" stroke="#C4B5A0" stroke-width="0.8" fill="none" opacity="0.3"/>
+
+  <!-- Lettering – S E E M S H A R P with tracked spacing -->
+  <!-- Left group: S E E M -->
+  <text x="14" y="102"
+        font-family="'Jost', 'Arial', sans-serif"
+        font-weight="400"
+        font-size="44"
+        letter-spacing="10"
+        fill="#8B7D6B"
+        opacity="0.95">SEEM</text>
+
+  <!-- Right group: H A R P -->
+  <text x="282" y="102"
+        font-family="'Jost', 'Arial', sans-serif"
+        font-weight="400"
+        font-size="44"
+        letter-spacing="10"
+        fill="#8B7D6B"
+        opacity="0.95">HARP</text>
+
+  <!-- S bridging letter in center over orb -->
+  <text x="224" y="102"
+        font-family="'Jost', 'Arial', sans-serif"
+        font-weight="400"
+        font-size="44"
+        fill="#8B7D6B"
+        opacity="0.95">S</text>
+</svg>
