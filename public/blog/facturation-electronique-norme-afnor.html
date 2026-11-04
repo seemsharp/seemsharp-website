@@ -1,0 +1,1858 @@
+<title>Facturation Électronique NF EN 16931</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
+
+<style>
+/* Layout: editorial long-read, two-tone header, structured case sections */
+:root {
+  --bg: #FAFAF8;
+  --bg-alt: #F2F1EC;
+  --fg: #1A1A18;
+  --fg-muted: #5A5A54;
+  --accent: #1D4E8A;
+  --accent-light: #E8EEF7;
+  --accent-warm: #C4832A;
+  --divider: #D8D7D0;
+  --code-bg: #EEEEE8;
+  --header-bg: #0F2340;
+  --header-fg: #E8F0FF;
+
+  --font-display: 'Playfair Display', 'Georgia', serif;
+  --font-body: 'Source Serif 4', 'Georgia', serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #12120F;
+    --bg-alt: #1C1C18;
+    --fg: #E8E8E2;
+    --fg-muted: #9A9A90;
+    --accent: #5B8FD4;
+    --accent-light: #1A2A40;
+    --accent-warm: #D4973A;
+    --divider: #2E2E28;
+    --code-bg: #1E1E1A;
+    --header-bg: #060E1A;
+    --header-fg: #BFD0EE;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #12120F;
+  --bg-alt: #1C1C18;
+  --fg: #E8E8E2;
+  --fg-muted: #9A9A90;
+  --accent: #5B8FD4;
+  --accent-light: #1A2A40;
+  --accent-warm: #D4973A;
+  --divider: #2E2E28;
+  --code-bg: #1E1E1A;
+  --header-bg: #060E1A;
+  --header-fg: #BFD0EE;
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header */
+.site-header {
+  background: var(--header-bg);
+  color: var(--header-fg);
+  padding-block: 56px 48px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+
+.header-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 20px;
+}
+
+.header-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 20px;
+  color: #fff;
+  text-wrap: balance;
+}
+
+.header-subtitle {
+  font-size: 1.1rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--header-fg);
+  opacity: 0.85;
+  margin: 0 0 28px;
+  line-height: 1.6;
+}
+
+.header-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--header-fg);
+  opacity: 0.6;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  padding-top: 20px;
+}
+
+/* Content */
+.content {
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 56px;
+}
+
+.content-inner {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* Typography */
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--accent);
+  margin: 56px 0 20px;
+  line-height: 1.2;
+  text-wrap: balance;
+  padding-bottom: 12px;
+  border-bottom: 2px solid var(--accent);
+}
+
+h2:first-of-type { margin-top: 0; }
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 32px 0 10px;
+  line-height: 1.3;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0 0 16px;
+  max-width: 68ch;
+}
+
+strong { font-weight: 600; color: var(--fg); }
+
+/* Lead paragraph */
+.lead {
+  font-size: 1.15rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--fg-muted);
+  line-height: 1.75;
+  margin-bottom: 36px;
+  padding-bottom: 36px;
+  border-bottom: 1px solid var(--divider);
+}
+
+/* Norm badge */
+.norm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-light);
+  border: 1px solid var(--accent);
+  border-radius: 4px;
+  padding: 6px 14px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+/* Info box */
+.infobox {
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 18px 20px;
+  margin: 24px 0;
+}
+
+.infobox p { margin: 0; font-size: 0.95rem; color: var(--fg); }
+.infobox p + p { margin-top: 8px; }
+
+/* Warning box */
+.warnbox {
+  background: #FEF3E2;
+  border-left: 3px solid var(--accent-warm);
+  border-radius: 0 6px 6px 0;
+  padding: 18px 20px;
+  margin: 24px 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .warnbox { background: #2A2010; }
+}
+:root[data-theme="dark"] .warnbox { background: #2A2010; }
+
+.warnbox p { margin: 0; font-size: 0.95rem; }
+.warnbox p + p { margin-top: 8px; }
+
+/* Process grid */
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  margin: 28px 0;
+}
+
+.process-card {
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
+  transition: box-shadow 0.15s;
+}
+
+.process-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+.process-card-header {
+  background: var(--header-bg);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.process-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--accent-warm);
+  letter-spacing: 0.08em;
+}
+
+.process-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--header-fg);
+  line-height: 1.3;
+}
+
+.process-card-body {
+  padding: 14px 16px;
+}
+
+.process-card-body p {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+  margin: 0;
+  max-width: none;
+}
+
+/* En clair callout */
+.en-clair { background: #EDF4FF; border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 18px 20px; margin: 24px 0; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .en-clair { background: #0d1f38; } }
+:root[data-theme="dark"] .en-clair { background: #0d1f38; }
+.en-clair p { margin: 0; font-size: 0.95rem; line-height: 1.6; }
+.en-clair p + p { margin-top: 8px; }
+.en-clair-label { font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; }
+
+/* Process card details */
+.proc-details { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--divider); }
+.proc-code { font-family: var(--font-mono); font-size: 11px; color: var(--fg-muted); margin-bottom: 8px; }
+.proc-fields { font-size: 0.82rem; color: var(--fg-muted); line-height: 1.5; }
+.proc-fields strong { color: var(--fg); }
+.proc-fields ul { margin: 4px 0 0; padding-left: 18px; }
+.proc-fields li { margin-bottom: 2px; }
+.proc-reqs { font-size: 0.78rem; color: var(--fg-muted); margin-top: 8px; border-top: 1px dashed var(--divider); padding-top: 6px; }
+
+/* Mandatory fields matrix */
+.matrix-wrap { overflow-x: auto; margin: 24px 0; border: 1px solid var(--divider); border-radius: 8px; }
+.matrix-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; min-width: 780px; }
+.matrix-table th { background: var(--header-bg); color: var(--header-fg); padding: 8px 10px; font-family: var(--font-mono); font-size: 10px; font-weight: 600; letter-spacing: 0.06em; border-bottom: 2px solid var(--divider); white-space: nowrap; text-align: center; }
+.matrix-table th.lh { text-align: left; min-width: 230px; color: #aec6e8; }
+.matrix-table td { padding: 7px 10px; border-bottom: 1px solid var(--divider); text-align: center; vertical-align: middle; }
+.matrix-table td.lh { text-align: left; font-size: 0.82rem; color: var(--fg); }
+.matrix-table td.lh code { font-size: 0.78rem; }
+.matrix-table tr:last-child td { border-bottom: none; }
+.matrix-table tr:hover td { background: var(--bg-alt); }
+.matrix-table tr.grp td { background: var(--bg-alt); font-family: var(--font-mono); font-size: 10px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); padding: 7px 10px; border-top: 1px solid var(--divider); }
+.m-obl { color: var(--accent); font-size: 1.1rem; font-weight: 700; }
+.m-cond { color: var(--accent-warm); font-size: 1.1rem; }
+.m-na { color: var(--divider); }
+.matrix-legend { display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.82rem; color: var(--fg-muted); margin-bottom: 16px; align-items: center; }
+
+/* Requirements table */
+.req-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 0.9rem;
+  overflow-x: auto;
+  display: block;
+}
+
+.req-table th {
+  background: var(--bg-alt);
+  padding: 10px 14px;
+  text-align: left;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+  border-bottom: 2px solid var(--divider);
+  white-space: nowrap;
+}
+
+.req-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--divider);
+  vertical-align: top;
+  line-height: 1.5;
+}
+
+.req-table tr:last-child td { border-bottom: none; }
+
+.req-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent);
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Code inline */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  background: var(--code-bg);
+  padding: 1px 6px;
+  border-radius: 3px;
+  color: var(--accent);
+}
+
+/* Syntax list */
+.syntax-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.syntax-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 12px 16px;
+  background: var(--bg-alt);
+  border-radius: 6px;
+  border: 1px solid var(--divider);
+}
+
+.syntax-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--accent-warm);
+  white-space: nowrap;
+  min-width: 80px;
+  padding-top: 2px;
+}
+
+.syntax-desc {
+  font-size: 0.88rem;
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+/* TVA table */
+.tva-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+@media (max-width: 540px) {
+  .tva-grid { grid-template-columns: 1fr; }
+}
+
+.tva-case {
+  background: var(--bg-alt);
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  padding: 14px;
+}
+
+.tva-case-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 6px;
+}
+
+.tva-case-name {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--fg);
+  margin-bottom: 4px;
+}
+
+.tva-case-desc {
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  line-height: 1.4;
+}
+
+/* Architecture diagram */
+.arch-diagram {
+  background: var(--bg-alt);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  padding: 24px;
+  margin: 24px 0;
+  overflow-x: auto;
+}
+
+.arch-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: nowrap;
+  min-width: max-content;
+}
+
+.arch-box {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 5px;
+  padding: 8px 14px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.arch-box.secondary {
+  background: var(--bg);
+  color: var(--fg);
+  border: 1.5px solid var(--accent);
+}
+
+.arch-box.warm {
+  background: var(--accent-warm);
+}
+
+.arch-arrow {
+  color: var(--fg-muted);
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.arch-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--fg-muted);
+  letter-spacing: 0.06em;
+  text-align: center;
+  margin-top: 4px;
+}
+
+/* Timeline */
+.timeline {
+  position: relative;
+  padding-left: 24px;
+  margin: 20px 0;
+  border-left: 2px solid var(--accent);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 20px;
+  padding-left: 16px;
+}
+
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -29px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  outline: 1px solid var(--accent);
+}
+
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--accent-warm);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  margin-bottom: 3px;
+}
+
+.timeline-text {
+  font-size: 0.9rem;
+  color: var(--fg);
+  line-height: 1.5;
+}
+
+/* Divider */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--divider);
+  margin: 48px 0;
+}
+
+/* Footer */
+.article-footer {
+  background: var(--bg-alt);
+  border-top: 1px solid var(--divider);
+  padding-block: 32px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  margin-top: 56px;
+}
+
+.footer-inner {
+  max-width: 760px;
+  margin: 0 auto;
+  font-size: 0.82rem;
+  color: var(--fg-muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: space-between;
+}
+
+ul, ol {
+  margin: 0 0 16px;
+  padding-left: 24px;
+}
+
+li { margin-bottom: 6px; line-height: 1.6; }
+
+@media (max-width: 600px) {
+  .process-grid { grid-template-columns: 1fr; }
+}
+
+/* XP Z12-014 — Cas d'usage cards */
+.cas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.cas-card {
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
+  transition: box-shadow 0.15s;
+}
+.cas-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+.cas-header {
+  background: #1A3A5C;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .cas-header { background: #0a1f36; } }
+:root[data-theme="dark"] .cas-header { background: #0a1f36; }
+.cas-id {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent-warm);
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+.cas-title {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #d8e8f8;
+  line-height: 1.3;
+}
+.cas-body {
+  padding: 14px 16px;
+}
+.cas-body p {
+  font-size: 0.87rem;
+  line-height: 1.55;
+  color: var(--fg-muted);
+  margin: 0;
+  max-width: none;
+}
+
+/* XP Z12-014 — Categories grid */
+.cu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+  margin: 24px 0;
+}
+.cu-category {
+  background: var(--bg-alt);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  padding: 16px;
+}
+.cu-cat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-warm);
+  margin-bottom: 10px;
+}
+.cu-category ul {
+  margin: 0;
+  padding-left: 16px;
+}
+.cu-category li {
+  font-size: 0.84rem;
+  color: var(--fg);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+@media (max-width: 600px) {
+  .cas-grid, .cu-grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="eyebrow">Réglementation · Dématérialisation · Guide pratique</div>
+    <h1 class="header-title">Facturation électronique : ce que la norme impose vraiment</h1>
+    <p class="header-subtitle">La norme NF EN 16931-1+A1 expliquée simplement — les 12 situations de facturation, les informations obligatoires et ce que ça change pour votre entreprise</p>
+    <div class="header-meta">
+      <span>NF EN 16931-1+A1 · Novembre 2019</span>
+      <span>Directive européenne 2014/55/UE</span>
+      <span>SEEMSHARP · Adrien Maes</span>
+      <span>Novembre 2026</span>
+    </div>
+  </div>
+</header>
+
+<!-- CONTENT -->
+<main class="content">
+<div class="content-inner">
+
+  <!-- INTRODUCTION -->
+  <p class="lead">
+    Envoyer une facture en PDF par e-mail, ce n'est plus suffisant. À partir de 2026, toutes les entreprises françaises assujetties à la TVA devront <strong>recevoir</strong> des factures dans un format lisible par un ordinateur. À partir de 2027, elles devront aussi en <strong>envoyer</strong>. La règle du jeu, c'est la norme européenne <strong>NF EN 16931-1+A1</strong> — et cet article vous explique ce qu'elle contient vraiment.
+  </p>
+
+  <div class="en-clair">
+    <div class="en-clair-label">En clair</div>
+    <p>Une facture électronique conforme, ce n'est pas juste un PDF bien mis en page. C'est un fichier structuré où chaque information (numéro, date, montant, TVA, coordonnées…) est rangée dans un « champ » identifié, que votre logiciel de comptabilité peut lire et traiter automatiquement — sans ressaisie manuelle.</p>
+    <p>La norme NF EN 16931-1+A1 définit la liste exhaustive de ces champs, leur format et les règles de calcul. Elle s'applique à toutes les factures B2B et B2G (entreprises entre elles, ou vers les administrations). Elle ne concerne pas les factures aux particuliers.</p>
+  </div>
+
+  <div class="norm-badge">📋 NF EN 16931-1+A1 · Indice Z 69-100-1 · ISSN 0335-3931</div>
+
+  <h2>Pourquoi cette obligation ?</h2>
+
+  <p>La Commission européenne estime que la généralisation de la facturation électronique permettrait d'économiser <strong>jusqu'à 240 milliards d'euros sur six ans</strong> à l'échelle de l'Union — grâce à la réduction des ressaisies, des erreurs et des délais de paiement. C'est dans cet objectif que la <strong>Directive 2014/55/UE</strong> a imposé aux administrations et collectivités européennes de recevoir des factures électroniques conformes à la norme.</p>
+
+  <p>En France, la loi de finances 2020 et l'ordonnance du 15 septembre 2021 ont étendu cette obligation à toutes les entreprises privées, avec un calendrier progressif :</p>
+
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date">DEPUIS 2017</div>
+      <div class="timeline-text">Obligation d'émettre et recevoir des factures électroniques pour les grandes entreprises dans le cadre des marchés publics (via Chorus Pro). La norme est déjà en vigueur dans le secteur public.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2026</div>
+      <div class="timeline-text"><strong>Toutes les entreprises</strong> assujetties à la TVA doivent pouvoir <em>recevoir</em> des factures structurées. Les grandes entreprises et ETI doivent aussi en <em>émettre</em>.</div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date">2027</div>
+      <div class="timeline-text"><strong>PME et micro-entreprises</strong> : obligation d'émettre à leur tour. La réforme concerne alors toute la chaîne.</div>
+    </div>
+  </div>
+
+  <div class="infobox">
+    <p><strong>Qui est concerné ?</strong> Toute entreprise française assujettie à la TVA qui facture à une autre entreprise (B2B) ou à une administration (B2G). Les factures aux particuliers (B2C) ne sont pas concernées.</p>
+  </div>
+
+  <h2>La norme NF EN 16931-1+A1 : qu'est-ce que c'est concrètement ?</h2>
+
+  <h3>Une liste de champs, pas un format de fichier</h3>
+
+  <p>Pensez à un <strong>formulaire Cerfa</strong> : il liste les cases à remplir, leur intitulé exact et leur format obligatoire. La norme EN 16931-1 fait pareil pour les factures. Elle ne dit pas à quoi doit ressembler votre fichier (XML, PDF, JSON…), mais elle définit <strong>quelles informations doivent y figurer</strong> et comment les exprimer.</p>
+
+  <p>En langage technique, on appelle ça un <em>modèle sémantique</em> : chaque information a un identifiant unique (par exemple, <code>BT-1</code> pour le numéro de facture, <code>BT-2</code> pour la date). Ce système d'identifiants garantit que le logiciel de votre fournisseur et celui de votre client "parlent la même langue", même s'ils sont complètement différents.</p>
+
+  <h3>Les deux formats de fichier reconnus</h3>
+
+  <p>La norme est compatible avec deux formats XML concrets, qui servent de "traduction" des champs sémantiques en fichier informatique :</p>
+
+  <div class="syntax-list">
+    <div class="syntax-item">
+      <div class="syntax-label">UBL 2.1</div>
+      <div class="syntax-desc"><strong>Universal Business Language</strong> — Format XML normalisé, utilisé dans les pays nordiques et pour les échanges avec les administrations françaises via <strong>Chorus Pro</strong>.</div>
+    </div>
+    <div class="syntax-item">
+      <div class="syntax-label">CII D16B</div>
+      <div class="syntax-desc"><strong>Cross Industry Invoice (ONU)</strong> — Format XML à la base du <strong>Factur-X</strong> français : un PDF que vous pouvez lire normalement, mais qui contient aussi un fichier XML lisible par les logiciels.</div>
+    </div>
+  </div>
+
+  <div class="en-clair">
+    <div class="en-clair-label">En clair — le Factur-X</div>
+    <p><strong>Factur-X</strong>, c'est le format recommandé en France pour la transition. Il ressemble à un PDF normal (vous pouvez l'imprimer, l'archiver, le lire), mais il contient en réalité deux versions de la facture : le PDF visible et un fichier XML structuré caché à l'intérieur. Les logiciels compatibles lisent automatiquement le XML ; les autres affichent simplement le PDF.</p>
+  </div>
+
+  <h2>Structure de la norme : deux niveaux d'exigences</h2>
+
+  <p>La norme distingue deux couches complémentaires d'exigences :</p>
+
+  <div class="arch-diagram">
+    <div class="arch-row">
+      <div class="arch-box" style="min-width:160px;">Modèle de facture de base<br><small style="font-weight:300;font-size:0.75em;">Core Invoice Model</small></div>
+    </div>
+    <div class="arch-row" style="margin-top:4px;">
+      <div style="width:16px;border-right:1px dashed var(--divider);height:16px;"></div>
+      <div style="flex:1;border-top:1px dashed var(--divider);"></div>
+      <div style="width:16px;border-left:1px dashed var(--divider);height:16px;"></div>
+    </div>
+    <div class="arch-row" style="justify-content:space-between;gap:16px;">
+      <div style="flex:1;min-width:0;">
+        <div class="arch-box secondary" style="width:100%;">Partie juridique<br><small style="font-size:0.75em;font-weight:400;">Exigences légales & fiscales (Directives TVA)</small></div>
+      </div>
+      <div style="flex:1;min-width:0;">
+        <div class="arch-box secondary" style="width:100%;">Partie commune<br><small style="font-size:0.75em;font-weight:400;">Éléments universellement acceptés en pratique commerciale</small></div>
+      </div>
+    </div>
+    <div class="arch-row" style="margin-top:16px;">
+      <div class="arch-box warm" style="min-width:140px;">CIUS</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box secondary">Restriction des éléments optionnels pour un secteur ou une chaîne</div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-box warm" style="min-width:140px;">Extension</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box secondary">Ajout d'éléments supplémentaires spécifiques à un secteur</div>
+    </div>
+  </div>
+
+  <h3>Adaptations sectorielles : CIUS et extensions</h3>
+
+  <p>La norme de base s'applique à tous les secteurs. Mais deux mécanismes permettent de l'adapter à des besoins spécifiques :</p>
+
+  <ul>
+    <li><strong>CIUS</strong> (Core Invoice Usage Specification) : une "version resserrée" qui rend obligatoires certains champs optionnels de la norme de base, ou qui précise leur usage. Par exemple, le secteur de la santé peut imposer un code établissement. Elle ne peut pas <em>ajouter</em> de nouveaux champs.</li>
+    <li><strong>Extension</strong> : ajoute des champs supplémentaires absents du modèle de base. Réservée aux besoins très spécifiques d'un secteur ; elle doit être enregistrée officiellement.</li>
+  </ul>
+
+  <div class="infobox">
+    <p><strong>Pour la plupart des entreprises</strong>, c'est la CIUS Factur-X qui s'applique. Votre logiciel de facturation doit l'implémenter ; vous n'avez pas à vous en préoccuper directement.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- PROCESSUS METIERS -->
+  <h2>Les 12 processus métiers (P1–P12)</h2>
+
+  <p>La norme identifie <strong>12 processus métiers</strong> couvrant l'ensemble des situations de facturation dans les relations commerciales entre entreprises et avec les administrations publiques.</p>
+
+  <div class="process-grid">
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P1</span>
+        <span class="process-title">Facturation sur bon de commande sous contrat</span>
+      </div>
+      <div class="process-card-body">
+        <p>Acheteur et Vendeur ont conclu un contrat cadre. L'Acheteur émet des bons de commande ; chaque livraison fait l'objet d'une facture distincte. La facture ne peut référencer qu'<strong>un seul bon de commande et une seule livraison</strong>.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>380</code> — Facture commerciale</div>
+          <div class="proc-fields"><strong>Champs spécifiques :</strong>
+            <ul>
+              <li>BT-13 – Référence bon de commande (1 BC max)</li>
+              <li>BT-23 – Référence de livraison (1 max)</li>
+              <li>BT-20 – Référence contrat cadre (facultatif)</li>
+              <li>BG-10 – Bénéficiaire (conditionnel, R1)</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigences : R1–R8 (tronc commun)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P2</span>
+        <span class="process-title">Facturation périodique sur contrat (sans BC)</span>
+      </div>
+      <div class="process-card-body">
+        <p>Le contrat déclenche directement la livraison sans bon de commande formel. Courant dans les services continus (eau, gaz, maintenance, restauration collective). La facture couvre une <strong>période déterminée</strong>.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>380</code> — Facture commerciale</div>
+          <div class="proc-fields"><strong>Champs spécifiques (obligatoires pour P2) :</strong>
+            <ul>
+              <li>BT-18 – Identifiant objet facturé (<strong>obligatoire</strong>, R33)</li>
+              <li>BG-14 – Période de facturation globale (<strong>obligatoire</strong>, R34)</li>
+              <li>BG-26 – Période de facturation par ligne (<strong>obligatoire</strong>, R30)</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigences spécifiques : R30, R33, R34</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P3</span>
+        <span class="process-title">Facturation sur bon de commande isolé</span>
+      </div>
+      <div class="process-card-body">
+        <p>Aucun contrat cadre préexistant. Le bon de commande tient lieu de contrat et déclenche la livraison. Typique des achats ponctuels (téléphone, Internet, de gré à gré).</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>380</code> — Facture commerciale</div>
+          <div class="proc-fields"><strong>Champs spécifiques :</strong>
+            <ul>
+              <li>BT-13 – Référence bon de commande (fonctionnellement requis)</li>
+              <li>BG-10 – Bénéficiaire (conditionnel, R1)</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigences : R1–R8 (tronc commun)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P4</span>
+        <span class="process-title">Acompte (pré-paiement avant émission finale)</span>
+      </div>
+      <div class="process-card-body">
+        <p>Un paiement partiel ou total est effectué <em>avant</em> émission de la facture finale. La facture indique le montant de l'acompte et le <strong>solde restant</strong>. Si le solde est négatif, une facture d'avoir (P9) est émise.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>386</code> — Demande de paiement d'acompte</div>
+          <div class="proc-fields"><strong>Champs spécifiques :</strong>
+            <ul>
+              <li>BT-9 – Date d'échéance de paiement</li>
+              <li>BT-113 – Montant déjà payé (acomptes reçus)</li>
+              <li>BG-16/17 – Instructions de paiement</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigences : R4–R8 (paiement)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P5</span>
+        <span class="process-title">Paiement comptant (sans BC ni contrat)</span>
+      </div>
+      <div class="process-card-body">
+        <p>Paiement effectué simultanément à la livraison ou par carte, sans bon de commande ni contrat préalable. La facture fait référence au <strong>numéro de compte ou de transaction</strong> utilisé.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>380</code> — Facture commerciale</div>
+          <div class="proc-fields"><strong>Champs spécifiques :</strong>
+            <ul>
+              <li>BT-10 – Référence acheteur (compte / transaction)</li>
+              <li>BG-16 – Instructions de paiement (moyen : CB, virement…)</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigences : R1–R8 (tronc commun)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P6</span>
+        <span class="process-title">Acompte avant livraison sur BC</span>
+      </div>
+      <div class="process-card-body">
+        <p>Variante de P4 avec bon de commande formel. La facturation et le paiement interviennent <em>avant</em> la livraison physique, sur la base du bon de commande convenu.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>386</code> — Demande de paiement d'acompte</div>
+          <div class="proc-fields"><strong>Champs spécifiques :</strong>
+            <ul>
+              <li>BT-13 – Référence bon de commande</li>
+              <li>BT-9 – Date d'échéance de paiement</li>
+              <li>BG-16/17 – Instructions de paiement</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigence : R6 (acompte sur BC)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P7</span>
+        <span class="process-title">Facture avec référence à un avis d'expédition</span>
+      </div>
+      <div class="process-card-body">
+        <p>Le Vendeur envoie un avis d'expédition avant la livraison. La facture <strong>fait obligatoirement référence</strong> à cet avis et doit en refléter exactement le contenu. Une facture ↔ un seul avis d'expédition.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>380</code> — Facture commerciale</div>
+          <div class="proc-fields"><strong>Champs spécifiques :</strong>
+            <ul>
+              <li>BT-16 – Référence avis d'expédition (<strong>obligatoire</strong>, R9)</li>
+              <li>BG-13 – Données de livraison (lieu, date effective)</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigence spécifique : R9 (BT-16 obligatoire pour P7, P8)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P8</span>
+        <span class="process-title">Facture avec avis d'expédition et de réception</span>
+      </div>
+      <div class="process-card-body">
+        <p>Après livraison, le Destinataire envoie un <strong>avis de réception</strong> signalant les éventuels incidents. La facture est établie à partir de cet avis et référence les deux documents.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>380</code> — Facture commerciale</div>
+          <div class="proc-fields"><strong>Champs spécifiques :</strong>
+            <ul>
+              <li>BT-16 – Référence avis d'expédition (<strong>obligatoire</strong>, R9)</li>
+              <li>BT-15 – Référence avis de réception (<strong>obligatoire</strong>, R10)</li>
+              <li>BG-13 – Données de livraison</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigences spécifiques : R9, R10</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P9</span>
+        <span class="process-title">Facture d'avoir ou facturation négative</span>
+      </div>
+      <div class="process-card-body">
+        <p>Utilisée pour les remboursements : retour de marchandises, retour d'emballages consignés, remises annuelles. Le montant total peut être négatif. Peut référencer la livraison, le BC, le contrat ou la facture initiale.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>381</code> — Note de crédit / avoir</div>
+          <div class="proc-fields"><strong>Particularités :</strong>
+            <ul>
+              <li>BG-10 – Bénéficiaire <strong>non applicable</strong> (R1 exclut P9)</li>
+              <li>Montants peuvent être négatifs</li>
+              <li>BG-3 – Référence facture initiale (conditionnel)</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">R1 exclut P9 du champ bénéficiaire</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P10</span>
+        <span class="process-title">Facturation rectificative</span>
+      </div>
+      <div class="process-card-body">
+        <p>Correction d'une facture contestée (erreur de description, quantité, taux de TVA). Deux mécanismes : <strong>annulation totale puis réémission</strong>, ou envoi d'une facture différentielle. La référence à la facture initiale est obligatoire.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>384</code> — Facture corrigée / rectificative</div>
+          <div class="proc-fields"><strong>Champs spécifiques :</strong>
+            <ul>
+              <li>BG-3 – Référence facture antérieure (<strong>obligatoire</strong>, R11)</li>
+              <li>BT-25 – Identifiant facture précédente</li>
+              <li>BT-26 – Date d'émission facture précédente</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigence spécifique : R11 (BG-3 obligatoire pour P10)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P11</span>
+        <span class="process-title">Facturation partielle et finale</span>
+      </div>
+      <div class="process-card-body">
+        <p>Courant dans la construction et les services publics. Des <strong>factures partielles</strong> (situations de travaux) précèdent la facture finale. Cette dernière doit référencer toutes les factures partielles antérieures.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>326</code> (partielle) / <code>380</code> (finale)</div>
+          <div class="proc-fields"><strong>Champs spécifiques :</strong>
+            <ul>
+              <li>BG-3 – Référence factures partielles (<strong>obligatoire</strong>, R12)</li>
+              <li>BG-14 – Période de facturation globale (<strong>obligatoire</strong>, R34)</li>
+              <li>BG-26 – Période de facturation par ligne (<strong>obligatoire</strong>, R30)</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigences spécifiques : R12, R30, R34</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="process-card">
+      <div class="process-card-header">
+        <span class="process-id">P12</span>
+        <span class="process-title">Autofacturation</span>
+      </div>
+      <div class="process-card-body">
+        <p>L'<strong>Acheteur émet la facture</strong> au nom du Vendeur. Autorisé par la Directive 2006/112/CE (Art. 224) sous réserve d'un accord préalable et d'une procédure d'acceptation formelle.</p>
+        <div class="proc-details">
+          <div class="proc-code">Code type BT-3 : <code>389</code> — Facture en autofacturation</div>
+          <div class="proc-fields"><strong>Particularités :</strong>
+            <ul>
+              <li>BT-27 – Raison sociale Vendeur (identifié par l'Acheteur)</li>
+              <li>Accord préalable obligatoire entre les parties</li>
+              <li>Procédure d'acceptation formelle requise</li>
+              <li>Mêmes champs sémantiques que P1 sinon</li>
+            </ul>
+          </div>
+          <div class="proc-reqs">Exigences : R1–R8 + accord Art. 224 Directive 2006/112/CE</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CHAMPS OBLIGATOIRES PAR CAS D'USAGE -->
+  <h2>Champs obligatoires par cas d'usage</h2>
+
+  <p>Le tableau suivant présente les principaux groupes et termes métiers (BG/BT) et leur caractère <strong>obligatoire</strong>, <strong>conditionnel</strong> ou <strong>non applicable</strong> pour chacun des 12 processus. Cette grille est issue de la lecture croisée de la cardinalité du modèle sémantique et des exigences R1–R70 de la norme.</p>
+
+  <div class="matrix-legend">
+    <span><strong style="color:var(--accent);font-size:1.1rem;">●</strong> Obligatoire (cardinalité 1..1 ou 1..n)</span>
+    <span><strong style="color:var(--accent-warm);">○</strong> Conditionnel (cardinalité 0..1 ou 0..n)</span>
+    <span>— Non applicable / exclu par exigence</span>
+  </div>
+
+  <div class="matrix-wrap">
+    <table class="matrix-table">
+      <thead>
+        <tr>
+          <th class="lh">Groupe / Terme métier</th>
+          <th>P1</th><th>P2</th><th>P3</th><th>P4</th><th>P5</th><th>P6</th>
+          <th>P7</th><th>P8</th><th>P9</th><th>P10</th><th>P11</th><th>P12</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><td colspan="13">DONNÉES DE BASE</td></tr>
+        <tr>
+          <td class="lh"><code>BT-1</code> Numéro de facture</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-2</code> Date d'émission</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-3</code> Code type (380/381/384…)</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-5</code> Code devise (ISO 4217)</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr class="grp"><td colspan="13">RÉFÉRENCE PROCESSUS (BG-2)</td></tr>
+        <tr>
+          <td class="lh"><code>BT-24</code> Identifiant spécification (CIUS)</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr class="grp"><td colspan="13">RÉFÉRENCES DOCUMENTAIRES</td></tr>
+        <tr>
+          <td class="lh"><code>BG-3</code> Référence facture antérieure</td>
+          <td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td>
+          <td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-cond">○</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-13</code> Référence bon de commande</td>
+          <td><span class="m-cond">○</span></td><td><span class="m-na">—</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td>
+          <td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-15</code> Référence avis de réception</td>
+          <td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td>
+          <td><span class="m-na">—</span></td><td><span class="m-obl">●</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-16</code> Référence avis d'expédition</td>
+          <td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td><td><span class="m-na">—</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-18</code> Identifiant objet facturé</td>
+          <td><span class="m-cond">○</span></td><td><span class="m-obl">●</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td>
+          <td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td>
+        </tr>
+        <tr class="grp"><td colspan="13">VENDEUR (BG-4 / BG-5)</td></tr>
+        <tr>
+          <td class="lh"><code>BT-27</code> Raison sociale Vendeur</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-40</code> Code pays Vendeur (ISO 3166-1)</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr class="grp"><td colspan="13">ACHETEUR (BG-7 / BG-8)</td></tr>
+        <tr>
+          <td class="lh"><code>BT-44</code> Raison sociale Acheteur</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-55</code> Code pays Acheteur (ISO 3166-1)</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr class="grp"><td colspan="13">BÉNÉFICIAIRE (BG-10)</td></tr>
+        <tr>
+          <td class="lh"><code>BG-10</code> Bénéficiaire (livraison)</td>
+          <td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td>
+          <td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-na">—</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td>
+        </tr>
+        <tr class="grp"><td colspan="13">PÉRIODE DE FACTURATION (BG-14)</td></tr>
+        <tr>
+          <td class="lh"><code>BG-14</code> Période de facturation globale</td>
+          <td><span class="m-cond">○</span></td><td><span class="m-obl">●</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td>
+          <td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-obl">●</span></td><td><span class="m-cond">○</span></td>
+        </tr>
+        <tr class="grp"><td colspan="13">TOTAUX (BG-22)</td></tr>
+        <tr>
+          <td class="lh"><code>BT-106</code> Somme des montants de ligne</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-109</code> Montant HT</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-112</code> Montant TTC</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-115</code> Montant à payer</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr class="grp"><td colspan="13">VENTILATION TVA (BG-23)</td></tr>
+        <tr>
+          <td class="lh"><code>BT-116</code> Base d'imposition TVA</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-117</code> Montant TVA</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-118</code> Code catégorie TVA</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr class="grp"><td colspan="13">LIGNE DE FACTURE (BG-25)</td></tr>
+        <tr>
+          <td class="lh"><code>BT-126</code> Identifiant ligne</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-129</code> Quantité facturée</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-130</code> Unité de mesure (UN/ECE)</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BT-131</code> Montant net ligne</td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+          <td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td><td><span class="m-obl">●</span></td>
+        </tr>
+        <tr>
+          <td class="lh"><code>BG-26</code> Période facturation par ligne</td>
+          <td><span class="m-cond">○</span></td><td><span class="m-obl">●</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td>
+          <td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-cond">○</span></td><td><span class="m-obl">●</span></td><td><span class="m-cond">○</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="infobox">
+    <p><strong>Note :</strong> cette grille présente les champs les plus structurants de la norme. La cardinalité complète (1..1, 0..1, 1..n, 0..n) et les exigences R1–R70 s'appliquent de manière cumulative — un champ conditionnel (○) peut devenir fonctionnellement obligatoire selon le contexte commercial ou les accords bilatéraux entre parties.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- FONCTIONNALITES -->
+  <h2>Ce que votre facture doit pouvoir faire</h2>
+
+  <p>La norme ne se contente pas de lister des champs — elle définit aussi des <strong>exigences fonctionnelles</strong> numérotées R1 à R70. Ce sont des règles métier que toute facture conforme doit respecter. Les voici regroupées par thème.</p>
+
+  <h3>Passer les écritures comptables automatiquement (R1–R4)</h3>
+  <p>Une facture conforme doit permettre à l'acheteur <em>et</em> au vendeur de passer leurs écritures comptables sans aucune ressaisie manuelle. Concrètement :</p>
+
+  <table class="req-table">
+    <thead>
+      <tr>
+        <th>Réf.</th>
+        <th>Exigence</th>
+        <th>Portée</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="req-id">R1</span></td>
+        <td>Identification du Bénéficiaire si différent du Vendeur</td>
+        <td>Niveau document, tous processus sauf P9</td>
+      </tr>
+      <tr>
+        <td><span class="req-id">R2</span></td>
+        <td>Éléments permettant l'écriture au débit et au crédit</td>
+        <td>Niveau document, tous processus</td>
+      </tr>
+      <tr>
+        <td><span class="req-id">R3</span></td>
+        <td>Éléments permettant l'écriture au débit au niveau ligne</td>
+        <td>Niveau ligne, tous processus</td>
+      </tr>
+      <tr>
+        <td><span class="req-id">R4</span></td>
+        <td>Numéros de compte comptable de l'Acheteur</td>
+        <td>Niveau document, tous processus</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Rapprocher la facture des documents commerciaux (R5–R44)</h3>
+  <p>La facture doit contenir assez d'informations pour qu'on puisse retrouver <em>d'où elle vient</em> : bon de commande, contrat, avis de livraison. C'est ce qui permet les contrôles automatiques "3 voies" (commande + livraison + facture) :</p>
+
+  <ul>
+    <li><strong>R5–R6</strong> : traçabilité vers le bon de commande et ses lignes (tous processus sauf P2 et P5)</li>
+    <li><strong>R7</strong> : traçabilité vers le contrat et l'appel d'offres (tous processus sauf P3 et P5)</li>
+    <li><strong>R9–R10</strong> : référence à l'avis d'expédition (P7) et à l'avis de réception (P8)</li>
+    <li><strong>R11</strong> : référence à la facture à rectifier (P10)</li>
+    <li><strong>R12</strong> : référence aux factures partielles depuis la facture finale (P11)</li>
+    <li><strong>R14–R15</strong> : prix net, remises et charges à tous les niveaux</li>
+    <li><strong>R20–R24</strong> : identification des biens et services (description, référence Vendeur, référence Acheteur, code article)</li>
+    <li><strong>R44</strong> : validation automatisée de la facture reçue</li>
+  </ul>
+
+  <h3>Déclarer la TVA correctement (R45–R55)</h3>
+
+  <p>La facture doit indiquer précisément le régime de TVA appliqué à chaque ligne. La norme couvre tous les cas possibles en France et dans l'UE :</p>
+
+  <div class="tva-grid">
+    <div class="tva-case">
+      <div class="tva-case-label">Cas standard</div>
+      <div class="tva-case-name">Fournitures soumises à TVA</div>
+      <div class="tva-case-desc">Application du taux normal, réduit ou super-réduit selon la nature du bien ou service.</div>
+    </div>
+    <div class="tva-case">
+      <div class="tva-case-label">Exonération</div>
+      <div class="tva-case-name">Fournitures exonérées de TVA</div>
+      <div class="tva-case-desc">Code motif d'exonération obligatoire (R55). Ex. : services médicaux, services d'enseignement.</div>
+    </div>
+    <div class="tva-case">
+      <div class="tva-case-label">Autoliquidation</div>
+      <div class="tva-case-name">Reverse charge (preneur redevable)</div>
+      <div class="tva-case-desc">La TVA est déclarée et payée par l'Acheteur. Applicable notamment en sous-traitance bâtiment et aux acquisitions intracommunautaires.</div>
+    </div>
+    <div class="tva-case">
+      <div class="tva-case-label">Intracommunautaire</div>
+      <div class="tva-case-name">Livraisons intracommunautaires</div>
+      <div class="tva-case-desc">TVA autoliquidée par le preneur au titre des acquisitions intracommunautaires. Numéros de TVA intracommunautaire obligatoires (R52).</div>
+    </div>
+    <div class="tva-case">
+      <div class="tva-case-label">Export</div>
+      <div class="tva-case-name">Hors champ de la Directive</div>
+      <div class="tva-case-desc">Transactions hors UE. La facture doit l'indiquer explicitement. Rattachement à la Directive 2006/112/CE non requis.</div>
+    </div>
+    <div class="tva-case">
+      <div class="tva-case-label">Mixte</div>
+      <div class="tva-case-name">Taux de TVA multiples</div>
+      <div class="tva-case-desc">Une facture peut comporter des lignes soumises à des taux différents. Totaux TVA ventilés par taux obligatoires (R50).</div>
+    </div>
+  </div>
+
+  <div class="warnbox">
+    <p><strong>À ne pas oublier :</strong> si vous facturez un client dans un autre pays de l'UE (livraison intracommunautaire), la norme impose (R52) les numéros de TVA intracommunautaire du vendeur <em>et</em> de l'acheteur, ainsi que les adresses postales officielles (R53). Sans ces champs, la facture sera rejetée.</p>
+  </div>
+
+  <h3>Résister à un contrôle fiscal (R56–R57)</h3>
+
+  <p>En cas d'audit ou de contrôle fiscal, la facture doit permettre de retracer l'intégralité de la transaction :</p>
+  <ul>
+    <li>Identification unique de la facture et date d'émission</li>
+    <li>Description complète des produits et services, valeur et quantité</li>
+    <li>Lien avec le règlement (référence de paiement)</li>
+    <li>Lien avec les documents justificatifs (contrat, BC, avis d'expédition)</li>
+    <li>Motif de rectification (R57, processus P10)</li>
+    <li>Identification légale et adresse de toutes les parties (Vendeur, Acheteur, Destinataire, Bénéficiaire, Représentant fiscal)</li>
+  </ul>
+
+  <h3>Indiquer comment payer (R58–R70)</h3>
+
+  <p>La facture peut contenir toutes les informations nécessaires pour que le paiement soit effectué automatiquement, sans échange supplémentaire :</p>
+
+  <ul>
+    <li><strong>Virement SEPA</strong> : IBAN, BIC et référence mandataire (R61)</li>
+    <li><strong>Prélèvement</strong> : identifiant du créancier et référence du mandat (R69)</li>
+    <li><strong>Carte de paiement</strong> : lien entre facture et transaction carte (R64)</li>
+    <li><strong>Montant à payer</strong> : solde restant dû après déduction des acomptes (R59)</li>
+    <li><strong>Date d'échéance</strong> : date limite de paiement (R60)</li>
+    <li><strong>Référence de paiement</strong> : code structuré permettant le rapprochement automatique (R62–R63)</li>
+  </ul>
+
+  <hr class="section-divider">
+
+  <!-- DONNEES SEMANTIQUES -->
+  <h2>Dans quel format renseigner les informations ?</h2>
+
+  <p>Chaque champ de la facture a un type de données précis. Pas question de mettre un montant en texte libre ou une date dans n'importe quel format. La norme définit 11 types, avec des exemples concrets :</p>
+
+  <table class="req-table">
+    <thead>
+      <tr><th>Type</th><th>Description</th><th>Exemple</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>Amount</code></td>
+        <td>Montant monétaire en devise</td>
+        <td><code>1250.00 EUR</code></td>
+      </tr>
+      <tr>
+        <td><code>Unit Price Amount</code></td>
+        <td>Prix unitaire, éventuellement pour une base autre que 1</td>
+        <td><code>12.50 EUR / 100 unités</code></td>
+      </tr>
+      <tr>
+        <td><code>Quantity</code></td>
+        <td>Quantité avec unité de mesure (codes UN/ECE)</td>
+        <td><code>5 KGM</code> (kilogrammes)</td>
+      </tr>
+      <tr>
+        <td><code>Percentage</code></td>
+        <td>Taux exprimé en pourcentage</td>
+        <td><code>20.00</code> (TVA 20%)</td>
+      </tr>
+      <tr>
+        <td><code>Identifier</code></td>
+        <td>Chaîne unique dans un schéma d'identification</td>
+        <td><code>FR76400000000001</code> (IBAN)</td>
+      </tr>
+      <tr>
+        <td><code>Document Reference</code></td>
+        <td>Référence à un document externe</td>
+        <td>Numéro de bon de commande</td>
+      </tr>
+      <tr>
+        <td><code>Code</code></td>
+        <td>Valeur issue d'une liste de codes normalisée</td>
+        <td><code>380</code> (facture commerciale)</td>
+      </tr>
+      <tr>
+        <td><code>Date</code></td>
+        <td>Date selon ISO 8601</td>
+        <td><code>2026-11-05</code></td>
+      </tr>
+      <tr>
+        <td><code>Text</code></td>
+        <td>Texte libre</td>
+        <td>Description d'un service</td>
+      </tr>
+      <tr>
+        <td><code>Binary Object</code></td>
+        <td>Objet binaire encodé (PDF, image)</td>
+        <td>Bon de livraison scanné (Base64)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="en-clair">
+    <div class="en-clair-label">En clair — règle d'arrondi</div>
+    <p>Tous les montants sont arrondis à 2 décimales selon la règle "scolaire" (arrondi half-up : 1,235 → 1,24). Les quantités peuvent avoir jusqu'à 4 décimales. Cette règle évite les micro-écarts de centimes qui bloquent les rapprochements automatiques.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- CONFORMITE -->
+  <h2>Comment savoir si votre logiciel est conforme ?</h2>
+
+  <p>La conformité s'évalue à trois niveaux distincts. Il ne suffit pas que votre logiciel "génère du XML" :</p>
+
+  <ol>
+    <li><strong>Conformité de la spécification</strong> : votre CIUS (profil de facturation) respecte les règles de la norme — c'est le travail de l'éditeur logiciel.</li>
+    <li><strong>Conformité du système</strong> : votre système peut envoyer <em>et</em> recevoir des factures valides — ce que vous devez vérifier en tant qu'entreprise.</li>
+    <li><strong>Conformité d'une facture</strong> : chaque facture individuelle respecte toutes les règles — ce que les plateformes (PDP) vérifient automatiquement à partir de 2026.</li>
+  </ol>
+
+  <div class="en-clair">
+    <div class="en-clair-label">En clair — que vérifier ?</div>
+    <p>Demandez à votre éditeur logiciel : "Mon logiciel est-il certifié Factur-X ou Peppol BIS ?" Ces certifications prouvent la conformité à EN 16931-1. Vous pouvez aussi tester vos factures sur le <strong>portail de validation Factur-X</strong> (FNFE-MPE) ou le <strong>validateur Peppol</strong> — ces outils gratuits détectent les erreurs avant que vos clients ne les rejettent.</p>
+  </div>
+
+  <hr class="section-divider">
+
+  <!-- IMPLICATIONS PRATIQUES -->
+  <h2>Ce que ça change concrètement pour votre entreprise</h2>
+
+  <h3>Ce que vous devrez faire (ou faire faire par votre logiciel)</h3>
+  <ul>
+    <li><strong>Ne plus mettre de texte libre là où il faut des données</strong> : le numéro de SIRET, l'IBAN, le numéro de TVA doivent être dans des champs structurés, pas dans une case "commentaire".</li>
+    <li><strong>Inclure votre numéro SIRET ou TVA intracommunautaire</strong> sur chaque facture, dans le bon champ.</li>
+    <li><strong>Ventiler la TVA par taux</strong> : si une facture a des lignes à 20% et d'autres à 10%, les totaux par taux doivent être calculés séparément et inclus.</li>
+    <li><strong>Référencer le bon de commande ou le contrat</strong> quand il existe — c'est obligatoire pour certains processus (P1, P3, P7, P8…).</li>
+    <li><strong>Garantir l'authenticité</strong> : signature électronique ou piste d'audit fiable (factures papier documentées, traitements traçables).</li>
+  </ul>
+
+  <h3>Ce que la norme ne vous impose pas</h3>
+  <ul>
+    <li>Changer votre façon d'envoyer les factures (email, plateforme, EDI…) — c'est le rôle des règles de transmission, pas de cette norme</li>
+    <li>Changer votre interface de saisie</li>
+    <li>Archiver d'une façon particulière (régi par l'article L.102 B du LPF)</li>
+    <li>Mettre en place un workflow d'approbation interne</li>
+  </ul>
+
+  <div class="warnbox">
+    <p><strong>Attention PME et indépendants :</strong> même si votre logiciel génère un fichier XML ou un Factur-X, vérifiez qu'il est bien conforme à EN 16931-1. Un fichier "qui ressemble à du XML" mais qui ne respecte pas la norme sera rejeté automatiquement par les plateformes (PDP) à partir de 2026. Testez sur le validateur gratuit Factur-X (FNFE-MPE) ou Peppol avant de déployer.</p>
+  </div>
+
+
+  <hr class="section-divider">
+
+  <!-- XP Z12-014 SECTION -->
+  <h2>XP Z12-014 : les cas d'usage B2B de la réforme</h2>
+
+  <div class="norm-badge">XP Z12-014 · AFNOR · Juin 2026 · Norme expérimentale</div>
+
+  <p>La norme XP Z12-014 "Cas d'usage B2B applicables dans le cadre de la Réforme Facture Électronique en France" est le complément opérationnel indispensable à EN 16931. Elle documente comment les entreprises échangent leurs factures via les <strong>Plateformes Agréées (PA)</strong> à partir du 1<sup>er</sup> septembre 2026, avec les statuts de cycle de vie, les acteurs impliqués et les obligations de chaque partie.</p>
+
+  <h3>Le nouveau circuit obligatoire : PA-E → PA-R</h3>
+
+  <p>Toutes les factures B2B domestiques entre assujettis à la TVA doivent passer par des Plateformes Agréées. Deux flux principaux coexistent : le <strong>Flux 2</strong> (facture entre entreprises) et le <strong>Flux 1</strong> (données fiscales vers le Concentrateur de Données du PPF).</p>
+
+  <div class="arch-diagram">
+    <div class="arch-row">
+      <div class="arch-box warm">VENDEUR</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box">PA-E</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box secondary">CdD PPF<br><small style="font-weight:400">Flux 1 (fiscal)</small></div>
+    </div>
+    <div class="arch-row" style="padding-left:120px;gap:4px;">
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--fg-muted)">Flux 2 (facture) ↓</div>
+    </div>
+    <div class="arch-row">
+      <div class="arch-box warm" style="visibility:hidden">VENDEUR</div>
+      <div class="arch-arrow" style="visibility:hidden">→</div>
+      <div class="arch-box">PA-R</div>
+      <div class="arch-arrow">→</div>
+      <div class="arch-box warm">ACHETEUR</div>
+    </div>
+    <div class="arch-row" style="padding-left:120px;margin-top:8px;gap:4px;">
+      <div style="font-family:var(--font-mono);font-size:11px;color:var(--fg-muted)">Flux 6 (statuts CDAR) ↑↓</div>
+    </div>
+  </div>
+
+  <p>Quatre <strong>statuts obligatoirement transmis au PPF</strong> (CdD) : <code>Déposée</code>, <code>Rejetée</code>, <code>Refusée</code> et <code>Encaissée</code> (ce dernier uniquement si TVA à l'encaissement).</p>
+
+  <h3>Les 7 cas nominaux (Section 4.2)</h3>
+
+  <p>Ces 7 scénarios couvrent le cycle de vie complet d'une facture — de la transmission normale jusqu'aux litiges. Toute Plateforme Agréée <strong>doit obligatoirement les prendre en charge</strong>.</p>
+
+  <div class="cas-grid">
+    <div class="cas-card">
+      <div class="cas-header"><span class="cas-id">N1</span><span class="cas-title">Transmission et cycle de vie (cas nominal)</span></div>
+      <div class="cas-body"><p>Le cas standard : VENDEUR crée la facture, PA-E transmet Flux 1 au PPF + Flux 2 à la PA-R. L'ACHETEUR approuve, transmet <code>Paiement Transmis</code>. Le VENDEUR encaisse et émet <code>Encaissée</code> si TVA à l'encaissement.</p></div>
+    </div>
+    <div class="cas-card">
+      <div class="cas-header"><span class="cas-id">N2</span><span class="cas-title">Rejet à l'émission</span></div>
+      <div class="cas-body"><p>La PA-E détecte une anomalie (format invalide, doublon, adresse inexistante). Statut <code>Rejetée</code> transmis au PPF et mis à disposition du VENDEUR. La facture est corrigée et renvoyée — aucune donnée fiscale incorrecte n'atteint l'administration.</p></div>
+    </div>
+    <div class="cas-card">
+      <div class="cas-header"><span class="cas-id">N3</span><span class="cas-title">Facture non transmise (destinataire sans PA active)</span></div>
+      <div class="cas-body"><p>L'ACHETEUR est dans l'annuaire PPF mais sans adresse électronique active (pas de PA choisie). La PA-E transmet le Flux 1 avec motif <code>NON_TRANSMISE</code>. Le VENDEUR doit contacter l'ACHETEUR directement pour le paiement.</p></div>
+    </div>
+    <div class="cas-card">
+      <div class="cas-header"><span class="cas-id">N4</span><span class="cas-title">Rejet en réception</span></div>
+      <div class="cas-body"><p>La PA-R rejette la facture reçue (contrôles applicatifs ou adresse de routage inconnue). Statut <code>Rejetée en réception</code> remonté à la PA-E et au VENDEUR, puis transmis au PPF. La facture corrigée peut être renvoyée.</p></div>
+    </div>
+    <div class="cas-card">
+      <div class="cas-header"><span class="cas-id">N5</span><span class="cas-title">Refus par l'ACHETEUR</span></div>
+      <div class="cas-body"><p>Après réception conforme, l'ACHETEUR refuse pour raison métier (montant erroné, prestation non conforme). Statut <code>Refusée</code> avec motif <strong>obligatoirement transmis au PPF</strong>. Le VENDEUR doit émettre un avoir ou une facture rectificative.</p></div>
+    </div>
+    <div class="cas-card">
+      <div class="cas-header"><span class="cas-id">N6</span><span class="cas-title">Litige suivi d'un Avoir</span></div>
+      <div class="cas-body"><p>L'ACHETEUR place la facture <code>En Litige</code>. Accord commercial trouvé : le VENDEUR émet un <strong>Avoir F2</strong> (BT-3 = 381) référençant F1. L'ACHETEUR approuve les deux, paie le solde net. Encaissement et clôture des deux cycles de vie.</p></div>
+    </div>
+    <div class="cas-card">
+      <div class="cas-header"><span class="cas-id">N7</span><span class="cas-title">Litige suivi d'une Facture Rectificative</span></div>
+      <div class="cas-body"><p>Après litige, le VENDEUR émet une <strong>Facture Rectificative F2</strong> (BT-3 = 384) qui annule et remplace F1 via BG-3. L'ACHETEUR annule F1 en comptabilité et traite F2 comme une nouvelle facture. F1 peut recevoir le statut <code>Annulée</code>.</p></div>
+    </div>
+  </div>
+
+  <h3>Cas d'usage spécifiques (Annexe A)</h3>
+
+  <p>Au-delà des 7 cas nominaux, la norme recense des dizaines de scénarios spécifiques organisés en grandes familles. Chacun indique quelles données EN 16931 utiliser et si le profil <strong>EXTENDED-CTC-FR</strong> est requis pour des données additionnelles.</p>
+
+  <div class="cu-grid">
+    <div class="cu-category">
+      <div class="cu-cat-label">Types de factures</div>
+      <ul>
+        <li>Factures d'acompte et facture finale</li>
+        <li>Factures rectificatives (Avoir / Rectificative)</li>
+        <li>Auto-facturation (ACHETEUR → VENDEUR)</li>
+        <li>Factures affacturées</li>
+        <li>Factures multi-vendeurs (intermédiaire transparent)</li>
+      </ul>
+    </div>
+    <div class="cu-category">
+      <div class="cu-cat-label">Tiers et mandataires</div>
+      <ul>
+        <li>Facturation par un tiers FACTURANT (mandat)</li>
+        <li>Paiement par un PAYEUR tiers</li>
+        <li>AGENT d'ACHETEUR / AGENT de VENDEUR</li>
+        <li>Sous-traitance avec paiement direct</li>
+        <li>Frais de collaborateurs</li>
+      </ul>
+    </div>
+    <div class="cu-category">
+      <div class="cu-cat-label">Modalités financières</div>
+      <ul>
+        <li>Paiement groupé — netting / compensation</li>
+        <li>Achats / ventes croisés</li>
+        <li>Pratique du Barter (échange de prestations)</li>
+        <li>Marge bénéficiaire (TVA sur marge)</li>
+        <li>Sociétés en Participation (SEP)</li>
+      </ul>
+    </div>
+    <div class="cu-category">
+      <div class="cu-cat-label">Spécificités techniques</div>
+      <ul>
+        <li>Sous-lignes de factures</li>
+        <li>Lignes négatives (reprises de consommation)</li>
+        <li>Raisons d'exemption TVA différentes par ligne</li>
+        <li>Produits composites (taux TVA multiples)</li>
+        <li>Gestion de la détaxe</li>
+      </ul>
+    </div>
+    <div class="cu-category">
+      <div class="cu-cat-label">International &amp; territorial</div>
+      <ul>
+        <li>Factures B2B internationales (Flux 8)</li>
+        <li>E-reporting transactions hors e-invoicing (Flux 10)</li>
+        <li>DROM / COM</li>
+        <li>Octroi de mer</li>
+        <li>Ventes croisées et auto-facture bi-directionnelle</li>
+      </ul>
+    </div>
+    <div class="cu-category">
+      <div class="cu-cat-label">Sectoriels</div>
+      <ul>
+        <li>Énergie (index de consommation, CO₂, taxes spécifiques)</li>
+        <li>Transport (poids, volumes, suppléments)</li>
+        <li>Achat de médias publicitaires</li>
+        <li>Immobilier</li>
+        <li>Agriculture</li>
+        <li>Place de marché</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Champs requis par cas d'usage</h3>
+
+  <p>Le tableau suivant part de chaque scénario pour indiquer les champs BT/BG spécifiques à renseigner <em>en plus</em> du socle commun obligatoire, et signale si le profil <strong>EXTENDED-CTC-FR</strong> (données additionnelles françaises) est nécessaire.</p>
+
+  <div class="infobox">
+    <p><strong>Socle commun (tout cas d'usage, Réforme France) :</strong> BT-1 (N° facture) · BT-2 (date) · BT-3 (type) · BT-5 (devise) · BG-4 VENDEUR + BT-29/30 (SIREN/TVA) · BG-7 ACHETEUR + BT-46/47 (SIREN/TVA) · BG-22 (totaux) · BG-23 (ventilation TVA) · BG-25 (lignes) · <strong>BT-34</strong> endpoint VENDEUR <code>0225:SIREN</code> · <strong>BT-49</strong> endpoint ACHETEUR <code>0225:SIREN</code></p>
+  </div>
+
+  <div class="matrix-wrap">
+    <table class="matrix-table" style="min-width:680px">
+      <thead>
+        <tr>
+          <th class="lh" style="min-width:200px">Cas d'usage</th>
+          <th style="min-width:70px">BT-3</th>
+          <th class="lh" style="min-width:300px;text-align:left">Champs spécifiques additionnels</th>
+          <th style="min-width:90px">Extended</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="grp"><td colspan="4">Factures de base — profil EN 16931 suffisant</td></tr>
+        <tr>
+          <td class="lh">Facture commerciale (N1 nominal)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">—</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Avoir / note de crédit (N6)</td>
+          <td><code>381</code></td>
+          <td class="lh" style="text-align:left"><strong>BG-3</strong> (réf. facture précédente) <strong>obligatoire</strong> · BG-10 interdit (R1)</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Facture Rectificative (N7)</td>
+          <td><code>384</code></td>
+          <td class="lh" style="text-align:left"><strong>BG-3</strong> (réf. facture précédente) <strong>obligatoire</strong></td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Facture d'acompte</td>
+          <td><code>386</code></td>
+          <td class="lh" style="text-align:left">BG-14 (période de facturation) · BT-18 (réf. objet)</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Facture partielle</td>
+          <td><code>326</code></td>
+          <td class="lh" style="text-align:left">BG-3 (réf. facture précédente) · BG-14 (période)</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Facture finale (après acomptes)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>BG-26</strong> (décompte acomptes) <strong>obligatoire</strong> (R30) · BG-14 (R34) · BT-18 (R33)</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Auto-facturation (P12)</td>
+          <td><code>389</code></td>
+          <td class="lh" style="text-align:left">BT-34 = endpoint ACHETEUR · BT-49 = endpoint VENDEUR <em>(rôles inversés)</em></td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Avec bon de commande (P1 / P3)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>BT-13</strong> (N° BC) <strong>obligatoire</strong></td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Avec avis d'expédition (P7)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>BT-16</strong> (réf. avis d'expédition) <strong>obligatoire</strong> (R9) · BG-13</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Avec avis d'expédition + réception (P8)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>BT-16</strong> obligatoire (R9) · <strong>BT-15</strong> (réf. réception) <strong>obligatoire</strong> (R10) · BG-13</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">TVA à l'encaissement</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-8 (date d'exigibilité TVA) · statut <code>Encaissée</code> <strong>obligatoirement transmis au PPF</strong></td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Marge bénéficiaire (TVA sur marge)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-118 = <code>M</code> (catégorie TVA marge) · BT-120 (taux)</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Lignes négatives</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-146 (prix unitaire négatif) ou BT-129 (quantité négative)</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">TVA par ligne différente (exonérations mixtes)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-151 (catég. TVA ligne) · BT-121 (motif exemption) · ventilation BG-23 par taux</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Paiement groupé / netting / compensation</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BG-16 (instructions paiement) · BT-83 (réf. paiement) · BT-9 (délai)</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Barter (échange de prestations)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-81 (moyen paiement) = <code>97</code> (compensation) · BT-9 (date échéance)</td>
+          <td class="m-na">—</td>
+        </tr>
+
+        <tr class="grp"><td colspan="4">Tiers et mandataires — profil EXTENDED-CTC-FR obligatoire</td></tr>
+        <tr>
+          <td class="lh">Affacturage</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BG-10 → IBAN du factor (BT-84) · <strong>EXT-FR-FE-BG-02</strong> (BÉNÉFICIAIRE : nom, SIREN, BIC)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Facturation par un tiers (FACTURANT)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>EXT-FR-FE-BG-05</strong> (FACTURANT : nom, SIREN/TVA, adresse) · réf. mandat recommandée</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Payeur tiers (centralisation de trésorerie)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-83 (réf. paiement) · <strong>EXT-FR-FE-BG-02</strong> (PAYEUR : SIREN, BIC, IBAN)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Agent d'ACHETEUR (ADRESSÉ À)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-49 = endpoint de l'agent · <strong>EXT-FR-FE-BG-01</strong> + <strong>EXT-FR-FE-BG-04</strong> (adresse ACHETEUR réel)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Agent de VENDEUR</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>EXT-FR-FE-BG-03</strong> (AGENT VENDEUR : nom, identifiant)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Sous-traitance, paiement direct client final</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BG-10 → client final · <strong>EXT-FR-FE-BG-02</strong> (PAYEUR = client final direct)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Factures multi-vendeurs</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-49 → intermédiaire transparent · <strong>EXT-FR-FE-BG-XX</strong> (bloc VENDEUR par groupe de lignes)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Sous-lignes de factures</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>EXT-FR-FE-BG-XX</strong> (sous-lignes avec prix unitaire, quantité, TVA propres)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Société en Participation (SEP)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>EXT-FR-FE-BG-XX</strong> (répartition quote-part SEP) · BG-4 = gérant de la SEP</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+
+        <tr class="grp"><td colspan="4">International et territorial</td></tr>
+        <tr>
+          <td class="lh">B2B international (Flux 8)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-40 / BT-55 (pays VENDEUR/ACHETEUR) · endpoints non contraints à schemeID 0225 · BT-6 (devise TVA)</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">DROM / COM</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BG-23 avec taux spécifiques DROM (8,5% / 2,1% / 1,05%) · BT-40 (région)</td>
+          <td class="m-na">—</td>
+        </tr>
+        <tr>
+          <td class="lh">Octroi de mer</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>EXT-FR-FE-XX</strong> (montant octroi de mer, taux) · BG-23 complété taxe additionnelle</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Détaxe (export hors UE)</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left">BT-118 = <code>G</code> (exonérée) · BT-121 (motif) · BT-55 (pays ACHETEUR hors UE)</td>
+          <td class="m-na">—</td>
+        </tr>
+
+        <tr class="grp"><td colspan="4">Sectoriels</td></tr>
+        <tr>
+          <td class="lh">Énergie</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>EXT-FR-FE-XX</strong> (index début/fin, volumes kWh/m³, CO₂) · BT-73 (date début période)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Transport</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>EXT-FR-FE-XX</strong> (poids, volumes, trajets) · BG-13 (lieu livraison/enlèvement)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Achat de médias publicitaires</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>EXT-FR-FE-XX</strong> (campagnes, insertions, formats) · BT-18 (réf. plan média)</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+        <tr>
+          <td class="lh">Immobilier</td>
+          <td><code>380</code></td>
+          <td class="lh" style="text-align:left"><strong>EXT-FR-FE-XX</strong> (réf. bien, loyer, charges) · BG-23 TVA sur marge si applicable</td>
+          <td class="m-obl">Oui</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p style="font-size:0.82rem;color:var(--fg-muted);margin-top:-8px">Les champs <code>EXT-FR-FE-BG-XX</code> et <code>EXT-FR-FE-XX</code> sont définis dans le profil <strong>EXTENDED-CTC-FR</strong> de la norme XP Z12-012. Leur structure exacte (identifiants, cardinalités) est précisée dans les spécifications externes DGFIP v3.1 disponibles sur impots.gouv.fr.</p>
+
+  <div class="en-clair">
+    <div class="en-clair-label">En clair — ce que ça change pour vous en 2026</div>
+    <p>À partir du <strong>1er septembre 2026</strong>, toute facture B2B entre assujettis TVA doit passer par une <strong>Plateforme Agréée (PA)</strong> — il n'est plus possible d'envoyer une facture électronique directement par email. Votre PA effectue automatiquement les contrôles de conformité EN 16931 et transmet les données fiscales à l'administration. Si un client pose le statut <code>Refusée</code> sur votre facture, ce refus est transmis au fisc et vous devez obligatoirement émettre un avoir ou une rectificative en réponse.</p>
+  </div>
+
+</div>
+</main>
+
+<footer class="article-footer">
+  <div class="footer-inner">
+    <span>Sources : NF EN 16931-1+A1 (Nov. 2019) · XP Z12-014 (Juin 2026) — AFNOR</span>
+    <span>© SEEMSHARP · Article à caractère informatif, non opposable à l'administration</span>
+  </div>
+</footer>
