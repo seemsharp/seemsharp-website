@@ -46,15 +46,6 @@ document.querySelectorAll('.section-header, .step, .value-item, .contact-item').
 /* ─── Footer year ─── */
 document.getElementById('year').textContent = new Date().getFullYear();
 
-/* ─── Math CAPTCHA ─── */
-let captchaAnswer = 0;
-function generateCaptcha() {
-  const a = Math.floor(Math.random() * 10) + 1;
-  const b = Math.floor(Math.random() * 10) + 1;
-  captchaAnswer = a + b;
-  document.getElementById('captcha-question').textContent = `${a} + ${b}`;
-}
-generateCaptcha();
 
 /* ─── Form anti-spam & submission ─── */
 const form       = document.getElementById('contact-form');
@@ -84,12 +75,10 @@ form.addEventListener('submit', async (e) => {
   // 2. Time-based (must take > 3 s to fill)
   if (Date.now() - formStart < 3000) return;
 
-  // 3. Math CAPTCHA
-  const userAnswer = parseInt(document.getElementById('captcha-answer').value, 10);
-  if (isNaN(userAnswer) || userAnswer !== captchaAnswer) {
-    showMsg('error', 'Réponse incorrecte au calcul anti-robot. Veuillez réessayer.');
-    generateCaptcha();
-    document.getElementById('captcha-answer').value = '';
+  // 3. Cloudflare Turnstile
+  const turnstileToken = document.querySelector('[name="cf-turnstile-response"]')?.value;
+  if (!turnstileToken) {
+    showMsg('error', 'Veuillez compléter la vérification anti-robot.');
     return;
   }
 
@@ -123,7 +112,7 @@ form.addEventListener('submit', async (e) => {
     await submitContact(payload);
     showMsg('success', 'Votre message a bien été envoyé. Nous vous répondrons au plus vite.');
     form.reset();
-    generateCaptcha();
+    if (window.turnstile) turnstile.reset();
   } catch (err) {
     console.error(err);
     showMsg('error', 'Une erreur est survenue. Veuillez nous contacter directement par email.');

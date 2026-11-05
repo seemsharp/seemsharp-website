@@ -25,6 +25,9 @@
 
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/blog.css" />
+
+  <!-- Cloudflare Turnstile -->
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -258,10 +261,9 @@
             <textarea id="message" name="message" rows="5" placeholder="Décrivez votre projet ou votre besoin…" required></textarea>
           </div>
 
-          <!-- Math CAPTCHA anti-spam -->
+          <!-- Cloudflare Turnstile -->
           <div class="form-group captcha-group">
-            <label for="captcha-answer">Vérification anti-robot : <span id="captcha-question" class="captcha-q"></span> = ? <span>*</span></label>
-            <input type="number" id="captcha-answer" name="captcha-answer" placeholder="Votre réponse" required />
+            <div class="cf-turnstile" data-sitekey="0x4AAAAAAF09BenNBgsIlw6y" data-theme="light"></div>
           </div>
 
           <div class="form-group checkbox-group">
