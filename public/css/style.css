@@ -40,7 +40,7 @@
   --container: 1180px;
   --gutter: clamp(1.25rem, 4vw, 2.5rem);
   --header-h: 72px;
-  --banner-h: 44px;
+  --banner-h: 0px;
 }
 
 /* ─── Reset ─── */
@@ -163,32 +163,6 @@ p { color: var(--clr-text-m); }
   box-shadow: var(--shadow-sm);
 }
 
-/* ── Announcement bar ── */
-.announcement-bar {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 101;
-  height: var(--banner-h);
-  background: #0F2340;
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: .8125rem;
-  font-weight: 500;
-  letter-spacing: .01em;
-  padding: 0 3rem;
-  text-align: center;
-}
-.announcement-bar a { color: #F5C842; text-decoration: underline; text-underline-offset: 3px; }
-.announcement-bar a:hover { color: #fff; }
-.bar-dismiss {
-  position: absolute; right: 1rem;
-  color: rgba(255,255,255,.6); font-size: 1.3rem; line-height: 1;
-  cursor: pointer; padding: .2rem .5rem;
-  background: none; border: none; font-family: inherit;
-}
-.bar-dismiss:hover { color: #fff; }
 .header-inner {
   display: flex;
   align-items: center;
