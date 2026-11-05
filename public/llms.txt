@@ -1,0 +1,25 @@
+# Seemsharp
+
+> Prestations informatiques sur mesure et pilotage de projets complexes pour les entreprises.
+
+Seemsharp est une société de conseil en informatique et gestion de projet basée en France. Elle accompagne les PME et grandes entreprises dans leur transformation digitale, le pilotage de projets IT et le développement de solutions logicielles sur mesure.
+
+## Services
+
+- **Gestion de projet** : PMO, Agile/Scrum, Kanban, cycle en V, coordination d'équipes, suivi budgétaire
+- **Développement logiciel** : applications web et mobiles, intégrations API, cloud (Firebase, AWS, GCP)
+- **Transformation digitale** : audit de l'existant, feuille de route digitale, accompagnement au changement
+- **Conseil IT** : architecture système, choix technologiques, audit de code
+
+## Blog
+
+Articles et ressources sur la gestion de projet IT, le développement logiciel et la transformation digitale.
+
+- [Les 5 erreurs à éviter dans la gestion de projet IT](https://www.seemsharp.com/blog/5-erreurs-gestion-projet-it.html)
+- [Transformation digitale : par où commencer pour une PME ?](https://www.seemsharp.com/blog/transformation-digitale-pme.html)
+
+## Contact
+
+- Site : https://www.seemsharp.com
+- Email : contact@seemsharp.com
+- LinkedIn : https://linkedin.com/company/seemsharp
