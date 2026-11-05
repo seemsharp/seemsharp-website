@@ -4,23 +4,26 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Visualiseur e-facture</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
 <style>
 /* Plan : une feuille de facture lisible sur un fond neutre.
-   Le montant à payer ouvre la page, le détail suit dans l'ordre d'une facture papier.
-   Bleu d'encre pour l'interface ; vert, ambre et rouge réservés à l'état des contrôles. */
+   Palette Seemsharp — taupe/beige chaud ; vert, ambre et rouge réservés aux contrôles. */
 :root {
   color-scheme: light;
-  --bg: #eceff4;
+  --bg: #FAF8F5;
   --paper: #ffffff;
-  --paper-2: #f5f7fa;
-  --band: #f1f6f2;
-  --ink: #131a2b;
-  --ink-2: #3f4a62;
-  --ink-3: #5b657d;
-  --line: #e0e4ec;
-  --line-2: #c8cfdc;
-  --accent: #1f4fd8;
-  --accent-soft: #e6ecfd;
+  --paper-2: #F0EDE8;
+  --band: #F0EDE8;
+  --ink: #3A3530;
+  --ink-2: #6B6560;
+  --ink-3: #9B958F;
+  --line: #E5DDD4;
+  --line-2: #D4C9BC;
+  --accent: #8B7D6B;
+  --accent-soft: #F0EDE8;
   --on-accent: #ffffff;
   --ok: #14793a;
   --ok-soft: #e1f3e7;
@@ -30,26 +33,27 @@
   --bad-soft: #fbe6e3;
   --credit: #7a2cc2;
   --credit-soft: #f0e5fb;
-  --shadow: 0 1px 2px rgb(19 26 43 / .06), 0 12px 32px rgb(19 26 43 / .07);
-  --font-ui: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  --font-doc: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --shadow: 0 1px 2px rgb(58 53 48 / .06), 0 12px 32px rgb(58 53 48 / .07);
+  --font-ui: 'Jost', system-ui, -apple-system, sans-serif;
+  --font-doc: 'Cormorant Garamond', Georgia, serif;
   --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+  --header-h: 72px;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --bg: #0e131d;
-    --paper: #151b28;
-    --paper-2: #1a2130;
-    --band: #182030;
-    --ink: #e9edf6;
-    --ink-2: #b9c2d6;
-    --ink-3: #8f9ab2;
-    --line: #263044;
-    --line-2: #36435c;
-    --accent: #7ba1ff;
-    --accent-soft: #1c2a4d;
-    --on-accent: #0a1020;
+    --bg: #1e1a16;
+    --paper: #252018;
+    --paper-2: #2d2720;
+    --band: #2d2720;
+    --ink: #ede9e4;
+    --ink-2: #c0b8b0;
+    --ink-3: #8f8880;
+    --line: #3d3630;
+    --line-2: #524a42;
+    --accent: #C4B5A0;
+    --accent-soft: #2d2720;
+    --on-accent: #1e1a16;
     --ok: #55c783;
     --ok-soft: #12301f;
     --warn: #f1b95a;
@@ -63,18 +67,18 @@
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --bg: #0e131d;
-  --paper: #151b28;
-  --paper-2: #1a2130;
-  --band: #182030;
-  --ink: #e9edf6;
-  --ink-2: #b9c2d6;
-  --ink-3: #8f9ab2;
-  --line: #263044;
-  --line-2: #36435c;
-  --accent: #7ba1ff;
-  --accent-soft: #1c2a4d;
-  --on-accent: #0a1020;
+  --bg: #1e1a16;
+  --paper: #252018;
+  --paper-2: #2d2720;
+  --band: #2d2720;
+  --ink: #ede9e4;
+  --ink-2: #c0b8b0;
+  --ink-3: #8f8880;
+  --line: #3d3630;
+  --line-2: #524a42;
+  --accent: #C4B5A0;
+  --accent-soft: #2d2720;
+  --on-accent: #1e1a16;
   --ok: #55c783;
   --ok-soft: #12301f;
   --warn: #f1b95a;
@@ -106,7 +110,7 @@ ul { padding: 0; list-style: none; }
 
 /* ---------- barre du haut ---------- */
 .topbar { background: var(--paper); border-bottom: 1px solid var(--line); }
-@media (min-width: 1000px) { .topbar { position: sticky; top: 0; z-index: 20; } }
+@media (min-width: 1000px) { .topbar { position: sticky; top: var(--header-h); z-index: 20; } }
 .topbar-in {
   max-width: 1040px; margin: 0 auto;
   padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
@@ -372,6 +376,27 @@ dialog::backdrop { background: rgb(10 14 24 / .55); }
 </style>
 </head>
 <body>
+
+<!-- ═══════════════════════════ SITE HEADER ═══════════════════════════ -->
+<header id="site-header" style="position:fixed;top:0;left:0;right:0;z-index:100;height:var(--header-h);background:rgba(250,248,245,.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;align-items:center;">
+  <div style="max-width:1180px;width:100%;margin:0 auto;padding:0 clamp(1.25rem,4vw,2.5rem);display:flex;align-items:center;justify-content:space-between;">
+    <a href="../" style="display:flex;align-items:center;text-decoration:none;">
+      <img src="../assets/logo.png" alt="Seemsharp" style="height:52px;width:auto;" />
+    </a>
+    <nav>
+      <ul style="list-style:none;margin:0;padding:0;display:flex;align-items:center;gap:2rem;">
+        <li><a href="../#services" style="text-decoration:none;color:var(--ink-2);font-family:var(--font-ui);font-size:.9rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;">Services</a></li>
+        <li><a href="../#approach" style="text-decoration:none;color:var(--ink-2);font-family:var(--font-ui);font-size:.9rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;">Approche</a></li>
+        <li><a href="../blog/" style="text-decoration:none;color:var(--ink-2);font-family:var(--font-ui);font-size:.9rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;">Blog</a></li>
+        <li><a href="../#contact" style="text-decoration:none;color:#fff;background:var(--accent);padding:.45rem 1.1rem;border-radius:999px;font-family:var(--font-ui);font-size:.85rem;font-weight:500;letter-spacing:.04em;text-transform:uppercase;">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<!-- push content below fixed header -->
+<div style="height:var(--header-h);" aria-hidden="true"></div>
+
 <header class="topbar noprint">
   <div class="topbar-in">
     <div class="brand">
@@ -2864,5 +2889,38 @@ el.btnClose.addEventListener('click', closeInvoice);
 
 })();
 </script>
+
+<!-- ═══════════════════════════ SITE FOOTER ═══════════════════════════ -->
+<footer style="background:var(--ink);color:rgba(255,255,255,.65);margin-top:4rem;" class="noprint">
+  <div style="max-width:1180px;margin:0 auto;padding:3rem clamp(1.25rem,4vw,2.5rem);display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;">
+    <div>
+      <img src="../assets/logo.png" alt="Seemsharp" style="height:48px;width:auto;margin-bottom:1rem;display:block;" />
+      <p style="font-family:var(--font-ui);font-size:.875rem;line-height:1.7;max-width:260px;">Prestations informatiques &amp; gestion de projet. Votre partenaire de confiance pour vos défis technologiques.</p>
+    </div>
+    <div>
+      <p style="font-family:var(--font-ui);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.75rem;">Navigation</p>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem;">
+        <li><a href="../#services" style="color:rgba(255,255,255,.65);text-decoration:none;font-family:var(--font-ui);font-size:.875rem;">Services</a></li>
+        <li><a href="../#approach" style="color:rgba(255,255,255,.65);text-decoration:none;font-family:var(--font-ui);font-size:.875rem;">Approche</a></li>
+        <li><a href="../blog/" style="color:rgba(255,255,255,.65);text-decoration:none;font-family:var(--font-ui);font-size:.875rem;">Blog</a></li>
+        <li><a href="../#contact" style="color:rgba(255,255,255,.65);text-decoration:none;font-family:var(--font-ui);font-size:.875rem;">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <p style="font-family:var(--font-ui);font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.75rem;">Outils</p>
+      <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.5rem;">
+        <li><a href="visualiseur-facture.html" style="color:rgba(255,255,255,.65);text-decoration:none;font-family:var(--font-ui);font-size:.875rem;">Visualiseur e-facture</a></li>
+        <li><a href="../blog/facturation-electronique-norme-afnor.html" style="color:rgba(255,255,255,.65);text-decoration:none;font-family:var(--font-ui);font-size:.875rem;">Guide facturation AFNOR</a></li>
+      </ul>
+    </div>
+  </div>
+  <div style="border-top:1px solid rgba(255,255,255,.08);padding:1rem clamp(1.25rem,4vw,2.5rem);">
+    <div style="max-width:1180px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:.5rem;">
+      <p style="font-family:var(--font-ui);font-size:.8rem;">© <span id="footer-year"></span> Seemsharp. Tous droits réservés.</p>
+      <p style="font-family:var(--font-ui);font-size:.8rem;"><a href="../mentions-legales.html" style="color:rgba(255,255,255,.45);text-decoration:none;">Mentions légales</a></p>
+    </div>
+  </div>
+</footer>
+<script>document.getElementById('footer-year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
