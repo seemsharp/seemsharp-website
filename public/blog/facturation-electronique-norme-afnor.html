@@ -1,6 +1,49 @@
-<title>Facturation Électronique NF EN 16931</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap">
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="index, follow" />
+  <title>Facturation électronique : ce que la norme AFNOR impose vraiment | Seemsharp</title>
+  <meta name="description" content="NF EN 16931-1+A1 et XP Z12-014 décryptées — les 12 processus métier, les champs obligatoires par cas d'usage et ce qui change concrètement pour votre entreprise à partir de septembre 2026." />
+  <link rel="canonical" href="https://www.seemsharp.com/blog/facturation-electronique-norme-afnor.html" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://www.seemsharp.com/blog/facturation-electronique-norme-afnor.html" />
+  <meta property="og:title" content="Facturation électronique : ce que la norme AFNOR impose vraiment" />
+  <meta property="og:description" content="NF EN 16931-1+A1 et XP Z12-014 décryptées — les 12 processus métier, les champs obligatoires par cas d'usage et ce qui change concrètement pour votre entreprise à partir de septembre 2026." />
+  <meta property="og:site_name" content="Seemsharp" />
+  <meta property="article:published_time" content="2026-11-04" />
+  <meta property="article:section" content="Réglementation" />
+
+  <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+  <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png" />
+  <meta name="theme-color" content="#8B7D6B" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Jost:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,300;1,8..60,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <link rel="stylesheet" href="../css/style.css" />
+  <link rel="stylesheet" href="../css/blog.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Facturation électronique : ce que la norme AFNOR impose vraiment",
+    "description": "NF EN 16931-1+A1 et XP Z12-014 décryptées — les 12 processus métier, les champs obligatoires par cas d'usage.",
+    "datePublished": "2026-11-04",
+    "dateModified": "2026-11-04",
+    "author": { "@type": "Organization", "name": "Seemsharp", "url": "https://www.seemsharp.com" },
+    "publisher": { "@type": "Organization", "name": "Seemsharp", "url": "https://www.seemsharp.com",
+      "logo": { "@type": "ImageObject", "url": "https://www.seemsharp.com/assets/logo.png" } },
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.seemsharp.com/blog/facturation-electronique-norme-afnor.html" },
+    "keywords": ["facturation électronique", "NF EN 16931", "AFNOR", "XP Z12-014", "réforme 2026"],
+    "articleSection": "Réglementation"
+  }
+  </script>
 
 <style>
 /* Layout: editorial long-read, two-tone header, structured case sections */
@@ -70,6 +113,7 @@ body {
 .site-header {
   background: var(--header-bg);
   color: var(--header-fg);
+  margin-top: calc(var(--header-h) + var(--banner-h));
   padding-block: 56px 48px;
   padding-left: max(16px, env(safe-area-inset-left, 0px));
   padding-right: max(16px, env(safe-area-inset-right, 0px));
@@ -661,24 +705,59 @@ li { margin-bottom: 6px; line-height: 1.6; }
   .cas-grid, .cu-grid { grid-template-columns: 1fr; }
 }
 </style>
+</head>
+<body>
 
-<!-- HEADER -->
-<header class="site-header">
-  <div class="header-inner">
-    <div class="eyebrow">Réglementation · Dématérialisation · Guide pratique</div>
-    <h1 class="header-title">Facturation électronique : ce que la norme impose vraiment</h1>
-    <p class="header-subtitle">La norme NF EN 16931-1+A1 expliquée simplement — les 12 situations de facturation, les informations obligatoires et ce que ça change pour votre entreprise</p>
-    <div class="header-meta">
-      <span>NF EN 16931-1+A1 · Novembre 2019</span>
-      <span>Directive européenne 2014/55/UE</span>
-      <span>SEEMSHARP · Adrien Maes</span>
-      <span>Novembre 2026</span>
-    </div>
+  <!-- ═══════════════════════════ ANNOUNCEMENT BAR ═══════════════════════════ -->
+  <div class="announcement-bar" id="announcement-bar" role="note">
+    <span>✦ <strong>Article</strong> — Facturation électronique obligatoire 2026 : vous êtes sur le guide complet</span>
+    <button class="bar-dismiss" onclick="(function(){document.getElementById('announcement-bar').style.display='none';document.documentElement.style.setProperty('--banner-h','0px');})()" aria-label="Fermer">×</button>
   </div>
-</header>
 
-<!-- CONTENT -->
-<main class="content">
+  <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+  <header id="header">
+    <div class="container header-inner">
+      <a href="../" class="logo-link">
+        <img src="../assets/logo.png" alt="Seemsharp" class="logo-img" />
+      </a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="../#services">Services</a></li>
+          <li><a href="../#approach">Approche</a></li>
+          <li><a href="../#about">À propos</a></li>
+          <li><a href="../blog/" aria-current="page">Blog</a></li>
+          <li><a href="../#contact" class="btn-nav">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════ ARTICLE HERO ═══════════════════════════ -->
+  <header class="site-header">
+    <div class="header-inner">
+      <nav class="breadcrumb" aria-label="Fil d'Ariane" style="margin-bottom:16px">
+        <a href="../" style="color:rgba(255,255,255,.5)">Accueil</a>
+        <span style="color:rgba(255,255,255,.3)"> / </span>
+        <a href="../blog/" style="color:rgba(255,255,255,.5)">Blog</a>
+        <span style="color:rgba(255,255,255,.3)"> / </span>
+        <span style="color:rgba(255,255,255,.75)">Facturation électronique</span>
+      </nav>
+      <div class="eyebrow">Réglementation · Dématérialisation · Guide pratique</div>
+      <h1 class="header-title">Facturation électronique : ce que la norme impose vraiment</h1>
+      <p class="header-subtitle">La norme NF EN 16931-1+A1 expliquée simplement — les 12 situations de facturation, les informations obligatoires et ce que ça change pour votre entreprise</p>
+      <div class="header-meta">
+        <span class="blog-tag" style="background:rgba(255,255,255,.12);color:rgba(255,255,255,.85);border:1px solid rgba(255,255,255,.2)">Réglementation</span>
+        <time datetime="2026-11-04" style="color:rgba(255,255,255,.5);font-size:.8rem">4 novembre 2026</time>
+        <span style="color:rgba(255,255,255,.5);font-size:.8rem"><i class="fa-regular fa-clock"></i> 15 min de lecture</span>
+      </div>
+    </div>
+  </header>
+
+<!-- ═══════════════════════════ ARTICLE BODY ═══════════════════════════ -->
+<main id="main-content" class="content">
 <div class="content-inner">
 
   <!-- INTRODUCTION -->
@@ -1850,9 +1929,58 @@ li { margin-bottom: 6px; line-height: 1.6; }
 </div>
 </main>
 
-<footer class="article-footer">
-  <div class="footer-inner">
-    <span>Sources : NF EN 16931-1+A1 (Nov. 2019) · XP Z12-014 (Juin 2026) — AFNOR</span>
-    <span>© SEEMSHARP · Article à caractère informatif, non opposable à l'administration</span>
-  </div>
-</footer>
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer id="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="../assets/logo.png" alt="Seemsharp" class="logo-img logo-footer" />
+        <p>Prestations informatiques &amp; gestion de projet. Votre partenaire de confiance pour vos défis technologiques.</p>
+      </div>
+      <div class="footer-links">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="../#services">Services</a></li>
+          <li><a href="../#approach">Approche</a></li>
+          <li><a href="../#about">À propos</a></li>
+          <li><a href="../blog/">Blog</a></li>
+          <li><a href="../#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Articles</h4>
+        <ul>
+          <li><a href="facturation-electronique-norme-afnor.html">Facturation électronique — Norme AFNOR</a></li>
+          <li><a href="transformation-digitale-pme.html">Transformation digitale PME</a></li>
+          <li><a href="5-erreurs-gestion-projet-it.html">5 erreurs en gestion de projet</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contact</h4>
+        <a href="mailto:contact@seemsharp.com">contact@seemsharp.com</a>
+        <div class="social-links">
+          <a href="https://linkedin.com/company/seemsharp" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year"></span> Seemsharp. Tous droits réservés.</p>
+        <p><a href="../mentions-legales.html">Mentions légales</a> &nbsp;|&nbsp; <a href="../politique-confidentialite.html">Politique de confidentialité</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const header = document.getElementById('header');
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20));
+    const burger = document.querySelector('.burger');
+    const nav = document.querySelector('.nav-list');
+    burger.addEventListener('click', () => {
+      const open = burger.classList.toggle('open');
+      nav.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open);
+    });
+  </script>
+</body>
+</html>
