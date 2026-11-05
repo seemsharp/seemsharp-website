@@ -1,7 +1,6 @@
 import { initializeApp }              from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getAnalytics }               from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js';
-import { getFirestore, collection, addDoc, serverTimestamp }
-                                       from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import { getFunctions, httpsCallable } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js';
 
 const firebaseConfig = {
   apiKey:            "AIzaSyCy-D8LiwFGO0-iMgttYo9t0ZRsUzldIlc",
@@ -15,15 +14,15 @@ const firebaseConfig = {
 
 const app       = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
-const db        = getFirestore(app);
-// Région Firestore : europe-west9 (Paris)
+const functions = getFunctions(app, 'europe-west1');
+
+const fnSubmitContact = httpsCallable(functions, 'submitContact');
 
 window.submitContact = async function submitContact(payload) {
-  // 1. Sauvegarde Firestore
-  await addDoc(collection(db, 'contacts'), {
-    ...payload,
-    createdAt: serverTimestamp(),
-  });
+  const token = document.querySelector('[name="cf-turnstile-response"]')?.value || '';
+
+  // 1. Vérification Turnstile + sauvegarde Firestore via Cloud Function
+  await fnSubmitContact({ ...payload, token });
 
   // 2. Envoi email via EmailJS
   const cfg = window.EMAILJS_CONFIG;

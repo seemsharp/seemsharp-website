@@ -1,6 +1,6 @@
 const { onCall, HttpsError } = require('firebase-functions/v2/https');
 const { initializeApp }      = require('firebase-admin/app');
-const { getFirestore }       = require('firebase-admin/firestore');
+const { getFirestore, FieldValue } = require('firebase-admin/firestore');
 const nodemailer             = require('nodemailer');
 
 initializeApp();
@@ -18,6 +18,39 @@ const transporter = nodemailer.createTransport({
     pass: process.env.SMTP_PASS,
   },
 });
+
+exports.submitContact = onCall(
+  { region: 'europe-west1' },
+  async (request) => {
+    const { token, prenom, nom, email, societe, sujet, message } = request.data;
+
+    if (!token) throw new HttpsError('invalid-argument', 'Token Turnstile manquant.');
+
+    // Vérification Turnstile côté serveur
+    const cfRes = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ secret: process.env.TURNSTILE_SECRET, response: token }),
+    });
+    const cfData = await cfRes.json();
+    if (!cfData.success) throw new HttpsError('permission-denied', 'Vérification anti-robot échouée.');
+
+    // Validation basique
+    if (!prenom || !nom || !email || !sujet || !message)
+      throw new HttpsError('invalid-argument', 'Champs manquants.');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+      throw new HttpsError('invalid-argument', 'Email invalide.');
+
+    // Sauvegarde Firestore
+    const db = getFirestore();
+    await db.collection('contacts').add({
+      prenom, nom, email, societe: societe || '', sujet, message,
+      createdAt: FieldValue.serverTimestamp(),
+    });
+
+    return { success: true };
+  }
+);
 
 exports.sendContactEmail = onCall(
   {
